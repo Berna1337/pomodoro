@@ -16,25 +16,8 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main>
-				<Tab.Group>
-					<Tab.List className="flex place-content-evenly space-x-1 rounded-xl bg-blue-900/20 p-1">
-						<Tab className="">Stats</Tab>
-						<Tab className="">Timer</Tab>
-						<Tab className="">Settings</Tab>
-					</Tab.List>
-					<Tab.Panels>
-						<Tab.Panel>
-							<Stats />
-						</Tab.Panel>
-						<Tab.Panel>
-							<Timer />
-						</Tab.Panel>
-						<Tab.Panel>
-							<Settings />
-						</Tab.Panel>
-					</Tab.Panels>
-				</Tab.Group>
+			<main className="bg-aurablack">
+				<Timer />
 			</main>
 		</div>
 	);
