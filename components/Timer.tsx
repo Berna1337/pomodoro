@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { PauseIcon, RefreshIcon } from "@heroicons/react/outline";
+import { PlayIcon } from "@heroicons/react/solid";
 
 export default function Timer() {
 	const [isPaused, setIsPaused] = useState(true);
-	const [breakTime, setBreakTime] = useState(300);
-	const [workTime, setWorkTime] = useState(1500);
+	const [breakTime, setBreakTime] = useState(5);
+	const [workTime, setWorkTime] = useState(10);
 	const [sessionTime, setSessionTime] = useState(workTime);
 	const [key, setKey] = useState(0);
 	const [isBreak, setIsBreak] = useState(false);
@@ -41,33 +43,35 @@ export default function Timer() {
 	};
 
 	return (
-		<div className="flex justify-center items-center h-screen">
-			<CountdownCircleTimer
-				key={key}
-				isPlaying={!isPaused}
-				duration={sessionTime}
-				colors={["#a277ff", "#f694ff", "#ffca85", "#ff6767"]}
-				colorsTime={[10, 7, 5, 0]}
-				size={300}
-				trailColor="#15141b"
-				onComplete={() => {
-					onFinish();
-				}}
-			>
-				{countdown}
-			</CountdownCircleTimer>
-			<button
-				className="text-aurawhite bg-aurablack hover:bg-aurablue-dark font-bold py-2 px-4 rounded-full"
-				onClick={() => setIsPaused(!isPaused)}
-			>
-				{isPaused ? "Start" : "Pause"}
-			</button>
-			<button
-				className="text-aurawhite bg-aurablack hover:bg-aurablue-dark font-bold py-2 px-4 rounded-full"
-				onClick={onReset}
-			>
-				Reset
-			</button>
+		<div className="h-screen">
+			<div className="flex justify-center p-6">
+				<CountdownCircleTimer
+					key={key}
+					isPlaying={!isPaused}
+					duration={sessionTime}
+					colors={["#a277ff", "#f694ff", "#ffca85", "#ff6767"]}
+					colorsTime={[10, 7, 5, 0]}
+					size={300}
+					trailColor="#15141b"
+					onComplete={() => {
+						onFinish();
+					}}
+				>
+					{countdown}
+				</CountdownCircleTimer>
+			</div>
+			<div className="flex justify-center space-x-12 p-6">
+				<button onClick={() => setIsPaused(!isPaused)}>
+					{isPaused ? (
+						<PlayIcon className="transition ease-in-out text-aurapurple w-12 h-12 hover:text-aurapink duration-300" />
+					) : (
+						<PauseIcon className="transition ease-in-out text-aurapurple w-12 h-12 hover:text-aurapink duration-300" />
+					)}
+				</button>
+				<button onClick={onReset}>
+					<RefreshIcon className="transition ease-in-out text-aurapurple w-12 h-12 hover:text-aurapink duration-300" />
+				</button>
+			</div>
 		</div>
 	);
 }
