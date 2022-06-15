@@ -5,15 +5,22 @@ import { PlayIcon } from "@heroicons/react/solid";
 
 export default function Timer() {
 	const [isPaused, setIsPaused] = useState(true);
-	const [breakTime, setBreakTime] = useState(5);
-	const [workTime, setWorkTime] = useState(10);
+	const [breakTime, setBreakTime] = useState(900);
+	const [longBreakTime, setLongBreakTime] = useState(300);
+	const [workTime, setWorkTime] = useState(1500);
 	const [sessionTime, setSessionTime] = useState(workTime);
 	const [key, setKey] = useState(0);
 	const [isBreak, setIsBreak] = useState(false);
+	const [workCycles, setWorkCycles] = useState(1); //real number of work cycles is workCycles - 1
 
 	const onFinish = () => {
 		if (!isBreak) {
-			setSessionTime(breakTime);
+			setWorkCycles(workCycles + 1);
+			if (workCycles % 4 === 0 && workCycles !== 0) {
+				setSessionTime(longBreakTime);
+			} else {
+				setSessionTime(breakTime);
+			}
 			setIsBreak(true);
 			setIsPaused(false);
 			setKey(key + 1);
@@ -36,7 +43,7 @@ export default function Timer() {
 		const seconds = String(remainingTime % 60).padStart(2, "0");
 
 		return (
-			<div className="text-3xl font-medium subpixel-antialiased text-aurawhite">
+			<div className="text-3xl font-medium subpixel-antialiased text-aurawhite font-mono">
 				{minutes}:{seconds}
 			</div>
 		);

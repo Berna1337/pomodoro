@@ -17,6 +17,9 @@ const Home: NextPage = () => {
 			</Head>
 
 			<main className="bg-aurablack">
+				<h1 className="text-aurawhite flex justify-center text-6xl p-6 font-mono">
+					Pomolist
+				</h1>
 				<Timer />
 			</main>
 		</div>
