@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { PauseIcon, RefreshIcon } from "@heroicons/react/outline";
 import { PlayIcon } from "@heroicons/react/solid";
@@ -43,22 +43,22 @@ export default function Timer() {
 		const seconds = String(remainingTime % 60).padStart(2, "0");
 
 		return (
-			<div className="text-3xl font-medium subpixel-antialiased text-aurawhite font-mono">
+			<div className="text-7xl font-medium subpixel-antialiased text-aurawhite font-mono">
 				{minutes}:{seconds}
 			</div>
 		);
 	};
 
 	return (
-		<div className="h-screen">
-			<div className="flex justify-center p-6">
+		<div>
+			<div className="flex justify-center p-4">
 				<CountdownCircleTimer
 					key={key}
 					isPlaying={!isPaused}
 					duration={sessionTime}
 					colors={["#a277ff", "#f694ff", "#ffca85", "#ff6767"]}
 					colorsTime={[10, 7, 5, 0]}
-					size={300}
+					size={512}
 					trailColor="#15141b"
 					onComplete={() => {
 						onFinish();
@@ -67,16 +67,16 @@ export default function Timer() {
 					{countdown}
 				</CountdownCircleTimer>
 			</div>
-			<div className="flex justify-center space-x-12 p-6">
+			<div className="flex justify-center space-x-12">
 				<button onClick={() => setIsPaused(!isPaused)}>
 					{isPaused ? (
-						<PlayIcon className="transition ease-in-out text-aurapurple w-12 h-12 hover:text-aurapink duration-300" />
+						<PlayIcon className="transition ease-in-out text-aurapurple w-20 h-20 hover:text-aurapink duration-300" />
 					) : (
-						<PauseIcon className="transition ease-in-out text-aurapurple w-12 h-12 hover:text-aurapink duration-300" />
+						<PauseIcon className="transition ease-in-out text-aurapurple w-20 h-20 hover:text-aurapink duration-300" />
 					)}
 				</button>
 				<button onClick={onReset}>
-					<RefreshIcon className="transition ease-in-out text-aurapurple w-12 h-12 hover:text-aurapink duration-300" />
+					<RefreshIcon className="transition ease-in-out text-aurapurple w-20 h-20 hover:text-aurapink duration-300" />
 				</button>
 			</div>
 		</div>
