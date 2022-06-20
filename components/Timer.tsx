@@ -38,6 +38,7 @@ export default function Timer() {
 		setKey(key + 1);
 	};
 
+	//the type of remainingTime should be number according to documentation but...
 	const countdown = ({ remainingTime }: any) => {
 		const minutes = Math.floor(remainingTime / 60);
 		const seconds = String(remainingTime % 60).padStart(2, "0");
