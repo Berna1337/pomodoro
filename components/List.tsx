@@ -31,14 +31,14 @@ export default function List() {
 		<div className="h-100 w-full flex items-center justify-center">
 			<div className="p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
 				<div className="flex mb-4">
-					<div className="flex mt-4">
+					<div className="flex mt-4 w-full">
 						<input
 							value={todoInput}
 							type="text"
 							placeholder="Add a new to do..."
 							onChange={(e) => setTodoInput(e.target.value)}
 							onKeyPress={handleKeyPress}
-							className="flex shadow appearance-none  w-full py-2 px-3 mr-4 bg-aurablack text-aurawhite p-2 rounded-lg text-3xl h-fit"
+							className="flex shadow appearance-none  w-full py-2 px-3 mr-4 bg-aurablack text-aurawhite p-2 rounded-lg text-3xl h-fit border-0 outline-none focus:outline-none"
 						/>
 						<button onClick={handleTodos}>
 							<PlusIcon className="flex-no-shrink  transition ease-in-out text-aurapurple w-9 h-9 hover:text-aurapink duration-300" />
@@ -47,7 +47,10 @@ export default function List() {
 				</div>
 
 				{todos.map((todo) => (
-					<li className="flex mb-4 items-center text-aurawhite" key={todo.id}>
+					<li
+						className="flex p-4 mb-4 items-center text-aurawhite bg-aurablack w-full border-2 rounded-xl transition ease-in-out border-aurapurple hover:border-aurapink duration-300"
+						key={todo.id}
+					>
 						<input
 							type="checkbox"
 							checked={todo.completed}
