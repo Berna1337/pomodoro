@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PlusIcon } from "@heroicons/react/outline";
+import { PlusIcon, TrashIcon } from "@heroicons/react/outline";
 
 export default function List() {
 	const [todoInput, setTodoInput] = useState("");
@@ -48,7 +48,7 @@ export default function List() {
 
 				{todos.map((todo) => (
 					<li
-						className="flex p-4 mb-4 items-center text-aurawhite bg-aurablack w-full border-2 rounded-xl transition ease-in-out border-aurapurple hover:border-aurapink duration-300"
+						className="flex p-4 mb-4 text-xl items-center text-aurawhite bg-aurablack w-full border-2 rounded-xl transition ease-in-out border-aurapurple hover:border-aurapink duration-300"
 						key={todo.id}
 					>
 						<input
@@ -62,7 +62,25 @@ export default function List() {
 								);
 							}}
 						/>
-						{todo.text}
+						<span
+							className={
+								todo.completed
+									? "flex w-full p-2 overflow-hidden line-through"
+									: "flex w-full p-2 overflow-hidden"
+							}
+						>
+							{todo.text}
+						</span>
+						<button
+							className="flex-no-shrink  transition ease-in-out text-aurapurple w-9 h-9 hover:text-aurapink duration-300"
+							onClick={() => {
+								setTodos((prevTodos) =>
+									prevTodos.filter((t) => t.id !== todo.id)
+								);
+							}}
+						>
+							<TrashIcon className="flex-no-shrink  transition ease-in-out text-aurapurple w-9 h-9 hover:text-aurapink duration-300" />
+						</button>
 					</li>
 				))}
 			</div>
