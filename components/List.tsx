@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/outline";
+
+type todoList = {
+	id: number;
+	text: string;
+	completed: boolean;
+};
 
 export default function List() {
 	const [todoInput, setTodoInput] = useState("");
-	const [todos, setTodos] = useState<
-		{
-			id: number;
-			text: string;
-			completed: boolean;
-		}[]
-	>([]);
+	const [todos, setTodos] = useState<todoList[]>([]);
 
 	function handleTodos() {
 		if (todoInput.length > 0) {
@@ -17,6 +17,17 @@ export default function List() {
 				...prevTodos,
 				{ id: new Date().valueOf(), text: todoInput, completed: false },
 			]);
+			localStorage.setItem(
+				"todos",
+				JSON.stringify([
+					...todos,
+					{
+						id: new Date().valueOf(),
+						text: todoInput,
+						completed: false,
+					},
+				])
+			);
 			setTodoInput("");
 		}
 	}
@@ -26,6 +37,13 @@ export default function List() {
 			handleTodos();
 		}
 	};
+
+	useEffect(() => {
+		const localTodos = localStorage.getItem("todos");
+		if (localTodos) {
+			setTodos(JSON.parse(localTodos));
+		}
+	}, []);
 
 	return (
 		<div className="h-100 w-full flex items-center justify-center">
@@ -60,6 +78,14 @@ export default function List() {
 										t.id === todo.id ? { ...t, completed: !t.completed } : t
 									)
 								);
+								localStorage.setItem(
+									"todos",
+									JSON.stringify(
+										todos.map((t) =>
+											t.id === todo.id ? { ...t, completed: !t.completed } : t
+										)
+									)
+								);
 							}}
 						/>
 						<span
@@ -76,6 +102,10 @@ export default function List() {
 							onClick={() => {
 								setTodos((prevTodos) =>
 									prevTodos.filter((t) => t.id !== todo.id)
+								);
+								localStorage.setItem(
+									"todos",
+									JSON.stringify(todos.filter((t) => t.id !== todo.id))
 								);
 							}}
 						>
